@@ -1,6 +1,5 @@
 import InputsLogin from '../components/InputsLogin'
 import BtnsLogin from '../components/BtnsLogin'
-import Logo from "../assets/parabot.png"
 
 export default function SizeBox(props) {
     return (
@@ -8,8 +7,11 @@ export default function SizeBox(props) {
             <div className="w-11/12 h-11/12">
                 {
                     props.conteudo == 'LadoUm' && (
-                        <div className="w-full h-full border-1 border-white/25 bg-white/25 rounded-lg p-5">
-                            <img src={Logo} alt="Logo" className="rounded-md" />
+                        <div className="w-full h-full flex flex-col justify-around py-5 items-center border-1 border-white/25 bg-white/25 rounded-lg p-5">
+                            <h3 className='text-sky-400 text-6xl font-bold'>ParaBOT</h3>
+                            <p className='text-white text-center'>Olá, seja bem-vindo ao ParaBOT!</p>
+                            <p className='text-white text-center'>Uma plataforma onde você pode gerenciar agentes, para algumas plataformas virtuais.</p>
+                            <p className='text-white text-center'>Acesse a plataforma realizando o login.</p>
                         </div>
                     )
                 }
