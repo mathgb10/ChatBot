@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import InputsLogin from '../components/InputsLogin'
 import BtnsLogin from '../components/BtnsLogin'
 
-
-
 export default function LoginPage() {
 
     const [nome, setNome] = useState('')
-    const [senha, setSenha] = useState('')    
+    const [senha, setSenha] = useState('')
+    const [logado, setLogado] = useState(false)
+    const [erro, setErro] = useState(null)
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -20,8 +20,10 @@ export default function LoginPage() {
         })
 
         const resultado = await resposta.json()
-        console.log(resultado)
+
+        resultado.sucess != true ? setErro(resultado.error) : setLogado(true)
     }
+
 
     return (
         <>
@@ -34,8 +36,18 @@ export default function LoginPage() {
                                     <h2>Login</h2>
                                 </div>
                                 <div className="flex flex-col gap-10">
-                                    <InputsLogin name='Nome' salvar={setNome} />
-                                    <InputsLogin name='Senha' salvar={setSenha} />
+                                    <div>
+                                        <InputsLogin name='Nome' salvar={setNome} />
+                                        {erro != null && (
+                                            erro.includes('Usuário') && (<p className='text-red-500'>{erro}</p>)
+                                        )}
+                                    </div>
+                                    <div>
+                                        <InputsLogin name='Senha' salvar={setSenha} />
+                                        {erro != null && (
+                                            erro.includes('Senha') && (<p className='text-red-500'>{erro}</p>)
+                                        )}
+                                    </div>
                                 </div>
                                 <div className="w-full flex items-center justify-center flex-col gap-2">
                                     <BtnsLogin name='Entrar' type='submit' />
